@@ -96,3 +96,26 @@ body {
   display: flex; /* To control the dimension */
   color: white;
 }
+
+.btn {
+  width: 25%;
+  height: 100%;
+  font-size: 3rem;
+  font-family: inherit;
+  background-color: var(--color-white);
+  border: 1px solid transparent;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .2s;
+}
+
+.btn:hover {
+  color: var(--color-light-white);
+  background-color: var(--color-tomato);
+}
+
+.btn:active {
+  transform: scale(.95);
+}
