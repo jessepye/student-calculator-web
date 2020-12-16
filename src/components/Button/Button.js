@@ -1,9 +1,17 @@
 import React from 'react';
 
-const button = () => (
-  <button className="btn">
-    1
-  </button>
-);
+const button = (props) => {
+  const classes = ['btn'];
+
+  if(props && props.type) {
+    classes.push('btn--' + props.type);
+  }
+
+  return (
+    <button className={classes.join(' ')}>
+      {props.children}
+    </button>
+  );
+}
 
 export default button;
