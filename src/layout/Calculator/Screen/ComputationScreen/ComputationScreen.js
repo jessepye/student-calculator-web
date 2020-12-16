@@ -1,9 +1,15 @@
 import React from 'react';
 
-const computationScreen = (props) => (
-  <div className="computation-screen">
-    {props.children}
-  </div>
-);
+const computationScreen = (props) => {
+  let classes = ["computation-screen"]
+  if(props.mode === "EnteringEquation") {
+    classes.push("selected")
+  }
+  return (
+    <div className={classes.join(" ")}>
+      {props.children}
+    </div>
+  )
+};
 
 export default computationScreen;

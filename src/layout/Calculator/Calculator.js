@@ -43,6 +43,23 @@ function Calculator() {
     setCurrentScreen(getCurrentScreen() + s);
   };
 
+  const approximationIsCloseEnough = () => {
+    console.log('close enough?');
+    let equationResult = evaluate(equation.replace('×', '*'));
+    let diff = Math.abs(parseFloat(approximation) - equationResult);
+    console.log('diff:', diff);
+    if (diff <= 1) {
+      return true;
+    }
+    let diffProportion = Math.abs(diff/equationResult);
+    console.log('diffProportion:', diffProportion);
+    if(diffProportion < 0.15) {
+      return true;
+    }
+
+    return false;
+  };
+
   const onButtonPress = event => {
     const pressedButton = event.target.innerHTML;
     if (pressedButton === 'C') {
@@ -53,11 +70,21 @@ function Calculator() {
     }
     else if (['+', '-', '*', '×', '/', '%'].indexOf(pressedButton) !== -1) appendCurrentScreen(' ' + pressedButton + ' ');
     else if (pressedButton === 'Enter') {
-      try {
-        const evalResult = evaluate(equation.replace('×', '*'));
-        setResult(Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2));
-      } catch (error) {
-        alert('Invalid Mathematical Equation');
+      console.log('mode:', mode);
+      if (mode === 'EnteringEquation') {
+        setMode('EnteringApproximation');
+        setApproximation(approxPrompt);
+      } else if (mode === 'EnteringApproximation') {
+        let equationResult;
+        try {
+          equationResult = evaluate(equation.replace('×', '*'));
+        } catch (error) {
+          alert('Invalid Mathematical Equation');
+        }
+        if(approximationIsCloseEnough()) {
+          setResult(equationResult);
+          setMode("Finished");
+        }
       }
     }
     else {
@@ -67,7 +94,7 @@ function Calculator() {
 
   return (
     <main className="calculator">
-      <Screen equation={equation} result={result} approximation={approximation}/>
+      <Screen equation={equation} result={result} approximation={approximation} mode={mode}/>
       <Keypad onButtonPress={onButtonPress}/>
     </main>
   )
