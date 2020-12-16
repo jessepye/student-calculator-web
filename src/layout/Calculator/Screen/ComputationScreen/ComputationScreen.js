@@ -1,8 +1,8 @@
 import React from 'react';
 
-const computationScreen = () => (
+const computationScreen = (props) => (
   <div className="computation-screen">
-    2+3+5*2
+    {props.children}
   </div>
 );
 
