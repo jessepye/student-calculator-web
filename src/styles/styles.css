@@ -41,7 +41,7 @@ body {
   */
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(to bottom right, var(--color-pink-transparent), var(--color-purple-transparent)), url(https://images.unsplash.com/photo-1582594810761-d3620c730e4f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1510&q=80);
+  background-image: linear-gradient(to bottom right, var(--color-pink-transparent), var(--color-purple-transparent)), url("../resources/background.jpg");
   background-position: center center;
   background-size: cover;
   display: flex;
