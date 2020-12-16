@@ -6,7 +6,7 @@ import Keypad from './Keypad/Keypad';
 function Calculator() {
   const [equation, setEquation] = useState('');
   const [result, setResult] = useState('0');
-  const approxPrompt = '(Enter an approximation)';
+  // const approxPrompt = '(Enter an approximation)';
   const [approximation, setApproximation] = useState('');
   /*
     Mode can be one of these strings:
@@ -44,7 +44,6 @@ function Calculator() {
   };
 
   const approximationIsCloseEnough = () => {
-    console.log('close enough?');
     let equationResult = evaluate(equation.replace('×', '*'));
     let diff = Math.abs(parseFloat(approximation) - equationResult);
     console.log('diff:', diff);
@@ -63,17 +62,44 @@ function Calculator() {
   const onButtonPress = event => {
     const pressedButton = event.target.innerHTML;
     if (pressedButton === 'C') {
-      setCurrentScreen('');
+      if (mode === "Finished") {
+        setMode("EnteringEquation");
+        setEquation('');
+        setResult(0);
+        setApproximation('');
+      } else {
+        // Allow the user to 'exit' the approximation mode by clicking C twice
+        if (mode === "EnteringApproximation" && approximation === '') {
+          setMode("EnteringEquation");
+        } else {
+          setCurrentScreen('');
+        }
+      }
     }
     else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === '.') {
-      appendCurrentScreen(pressedButton);
+      if (mode === "Finished") { // we just finished a calculation, start a new one
+        setMode("EnteringEquation");
+        setEquation(pressedButton);
+        setResult(0);
+        setApproximation('');
+      } else {
+        appendCurrentScreen(pressedButton);
+      }
     }
-    else if (['+', '-', '*', '×', '/', '%'].indexOf(pressedButton) !== -1) appendCurrentScreen(' ' + pressedButton + ' ');
+    else if (['+', '-', '*', '×', '/', '%'].indexOf(pressedButton) !== -1) {
+      if (mode === "Finished") {
+        setMode("EnteringEquation");
+        setEquation(result + ' ' + pressedButton + ' ');
+        setResult(0);
+        setApproximation('');
+      } else {
+        appendCurrentScreen(' ' + pressedButton + ' ');
+      }
+    }
     else if (pressedButton === 'Enter') {
-      console.log('mode:', mode);
       if (mode === 'EnteringEquation') {
         setMode('EnteringApproximation');
-        setApproximation(approxPrompt);
+        setApproximation('');
       } else if (mode === 'EnteringApproximation') {
         let equationResult;
         try {
@@ -82,9 +108,11 @@ function Calculator() {
           alert('Invalid Mathematical Equation');
         }
         if(approximationIsCloseEnough()) {
-          setResult(equationResult);
+          setResult(parseFloat(equationResult.toFixed(6)));
           setMode("Finished");
         }
+      } else if (mode === "Finished") {
+
       }
     }
     else {
@@ -94,6 +122,7 @@ function Calculator() {
 
   return (
     <main className="calculator">
+      {/* <div class="debug">{mode}</div> */}
       <Screen equation={equation} result={result} approximation={approximation} mode={mode}/>
       <Keypad onButtonPress={onButtonPress}/>
     </main>

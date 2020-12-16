@@ -22,8 +22,8 @@ body {
 
   --color-tomato: #d40640;
   --color-light-tomato: #f33c70;
-  --color-purple-transparent: rgba(88, 24, 69, .9);
-  --color-pink-transparent: rgba(216, 14, 91, .9);
+  --color-purple-transparent: rgba(88, 24, 69, .7);
+  --color-pink-transparent: rgba(216, 14, 91, .7);
 
   --color-orange: #ff3c00;
 
@@ -41,7 +41,8 @@ body {
   */
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(to bottom right, var(--color-pink-transparent), var(--color-purple-transparent)), url(https://i.pinimg.com/originals/91/b5/cd/91b5cdab51e207263169904b227503b4.jpg);
+  background-image: linear-gradient(to bottom right, var(--color-pink-transparent), var(--color-purple-transparent)), url(https://images.unsplash.com/photo-1582594810761-d3620c730e4f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1510&q=80);
+  background-position: center center;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -49,14 +50,16 @@ body {
 }
 
 .calculator {
-  height: 80vh;
-  width: 25%;
+  height: 95%;
+  max-height: 600px;
+  width: 100%;
+  max-width: 400px;
   box-shadow: 0 2rem 4rem var(--shadow);
   background-color: var(--color-white);
 }
 
 .screen {
-  height: 25vh;
+  height: 30%; /* other 70% is keypad */
   width: 100%;
   overflow: visible;
   white-space: nowrap;
@@ -65,9 +68,9 @@ body {
 }
 
 .result-screen {
-  height: 13vh;
+  height: 40%;
   padding: 0 2rem;
-  font-size: 8rem;
+  font-size: 6rem;
   font-weight: 600;
   background-color: color-purple-transparent;
 
@@ -78,7 +81,7 @@ body {
 }
 
 .computation-screen {
-  height: 6vh;
+  height: 30%;
   padding: 0 2rem;
   font-size: 2.5rem;
   background-color: var(--color-tomato);
@@ -90,7 +93,7 @@ body {
 }
 
 .approximation-screen {
-  height: 6vh;
+  height: 30%;
   padding: 0 2rem;
   font-size: 2.5rem;
   background-color: var(--color-tomato);
@@ -107,12 +110,12 @@ body {
 }
 
 .keypad {
-  height: 55vh;
+  height: 70%; /* other 30% is screen */
   width: 100%;
 }
 
 .keypad__row {
-  height: 11vh; /* (80vh calculator - 25vh screen) / 5 keypadRow */
+  height: 20%; /* 5 equal rows */
   width: 100%;
   display: flex; /* To control the dimension */
   color: white;
