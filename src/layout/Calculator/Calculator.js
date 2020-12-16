@@ -11,11 +11,10 @@ function Calculator() {
     const pressedButton = event.target.innerHTML;
     if (pressedButton === 'C') setEquation('');
     else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === '.') setEquation(equation + pressedButton);
-    else if (['+', '-', '*', '/', '%'].indexOf(pressedButton) !== -1) setEquation(equation + ' ' + pressedButton + ' ');
+    else if (['+', '-', '*', '×', '/', '%'].indexOf(pressedButton) !== -1) setEquation(equation + ' ' + pressedButton + ' ');
     else if (pressedButton === '=') {
       try {
-        // eslint-disable-next-line
-        const evalResult = evaluate(equation);
+        t statconst evalResult = evaluate(equation.replace('×','*'));
         setResult(Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2));
       } catch (error) {
         alert('Invalid Mathematical Equation');

@@ -15,7 +15,7 @@ const keypad = (props) => (
       <Button onButtonPress={props.onButtonPress}>7</Button>
       <Button onButtonPress={props.onButtonPress}>8</Button>
       <Button onButtonPress={props.onButtonPress}>9</Button>
-      <Button onButtonPress={props.onButtonPress}>*</Button>
+      <Button onButtonPress={props.onButtonPress}>×</Button>
     </KeypadRow>
 
     <KeypadRow>
