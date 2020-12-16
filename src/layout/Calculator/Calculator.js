@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { evaluate } from 'mathjs';
 import Screen from './Screen/Screen';
 import Keypad from './Keypad/Keypad';
 
@@ -6,19 +7,15 @@ function Calculator() {
   const [equation, setEquation] = useState('');
   const [result, setResult] = useState('0');
 
-  const clear = () => {
-    setEquation('');
-  }
-
   const onButtonPress = event => {
     const pressedButton = event.target.innerHTML;
-    if (pressedButton === 'C') clear();
+    if (pressedButton === 'C') setEquation('');
     else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === '.') setEquation(equation + pressedButton);
     else if (['+', '-', '*', '/', '%'].indexOf(pressedButton) !== -1) setEquation(equation + ' ' + pressedButton + ' ');
     else if (pressedButton === '=') {
       try {
         // eslint-disable-next-line
-        const evalResult = eval(equation);
+        const evalResult = evaluate(equation);
         setResult(Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2));
       } catch (error) {
         alert('Invalid Mathematical Equation');
