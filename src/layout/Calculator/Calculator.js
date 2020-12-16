@@ -6,15 +6,27 @@ import Keypad from './Keypad/Keypad';
 function Calculator() {
   const [equation, setEquation] = useState('');
   const [result, setResult] = useState('0');
+  const approxPrompt = '(Enter an approximation)';
+  const [approximation, setApproximation] = useState(approxPrompt);
+  /*
+    EnterintEquation
+    EnteringApproximation
+    Finished
+  */
+  const [mode, setMode] = useState('EnteringEquation');
 
   const onButtonPress = event => {
     const pressedButton = event.target.innerHTML;
-    if (pressedButton === 'C') setEquation('');
-    else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === '.') setEquation(equation + pressedButton);
+    if (pressedButton === 'C') {
+      setEquation('');
+    }
+    else if ((pressedButton >= '0' && pressedButton <= '9') || pressedButton === '.') {
+      setEquation(equation + pressedButton);
+    }
     else if (['+', '-', '*', '×', '/', '%'].indexOf(pressedButton) !== -1) setEquation(equation + ' ' + pressedButton + ' ');
-    else if (pressedButton === '=') {
+    else if (pressedButton === 'Enter') {
       try {
-        t statconst evalResult = evaluate(equation.replace('×','*'));
+        const evalResult = evaluate(equation.replace('×', '*'));
         setResult(Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2));
       } catch (error) {
         alert('Invalid Mathematical Equation');
@@ -28,7 +40,7 @@ function Calculator() {
 
   return (
     <main className="calculator">
-      <Screen equation={equation} result={result} />
+      <Screen equation={equation} result={result} approximation={approximation}/>
       <Keypad onButtonPress={onButtonPress}/>
     </main>
   )

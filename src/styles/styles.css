@@ -21,6 +21,7 @@ body {
   --color-light-white: #eee;
 
   --color-tomato: #d40640;
+  --color-light-tomato: #f33c70;
   --color-purple-transparent: rgba(88, 24, 69, .9);
   --color-pink-transparent: rgba(216, 14, 91, .9);
 
@@ -57,7 +58,6 @@ body {
 .screen {
   height: 25vh;
   width: 100%;
-  padding: 0 2rem;
   overflow: hidden;
   white-space: nowrap;
   color: var(--color-light-white);
@@ -65,24 +65,40 @@ body {
 }
 
 .result-screen {
-  height: 19vh;
+  height: 13vh;
+  padding: 0 2rem;
   font-size: 8rem;
   font-weight: 600;
+  background-color: color-purple-transparent;
 
   /* To display the value at the bottom-right of the container */
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .computation-screen {
   height: 6vh;
+  padding: 0 2rem;
   font-size: 2.5rem;
+  background-color: var(--color-tomato);
 
-  /* To display the value at the bottom-right of the container */
+  /* To display the value at the right of the container */
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.approximation-screen {
+  height: 6vh;
+  padding: 0 2rem;
+  font-size: 2.5rem;
+  background-color: var(--color-tomato);
+
+  /* To display the value at the right of the container */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .keypad {
@@ -128,6 +144,5 @@ body {
 }
 
 .btn--large:hover {
-  background-color: var(--color-white);
-  color: var(--color-tomato);
+  background-color: var(--color-light-tomato);
 }
