@@ -186,18 +186,3 @@ body {
 .btn--large:hover {
   background-color: var(--enter-button-hover-color);
 }
-
-/* Confetti! */
-
-.dot-container {
-  position:absolute;
-  left:0;
-  top:0;
-  overflow:visible;
-  z-index:5000;
-  pointer-events:none;
-}
-.dot {
-  position: absolute;
-  pointer-events: none; /*performance optimization*/
-}

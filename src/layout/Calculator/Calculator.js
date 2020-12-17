@@ -50,12 +50,12 @@ function Calculator() {
   const approximationIsCloseEnough = () => {
     let equationResult = evaluate(equation.replace('×', '*'));
     let diff = Math.abs(parseFloat(approximation) - equationResult);
-    console.log('diff:', diff);
+    // console.log('diff:', diff);
     if (diff <= 1) {
       return true;
     }
     let diffProportion = Math.abs(diff/equationResult);
-    console.log('diffProportion:', diffProportion);
+    // console.log('diffProportion:', diffProportion);
     if(diffProportion <= 0.5) {
       return true;
     }
@@ -116,7 +116,7 @@ function Calculator() {
           setResult(parseFloat(equationResult.toFixed(6)));
           setConfettiFlag(true)
           setTimeout( () => {
-            console.log("setting flag to false");
+            // console.log("setting flag to false");
             setConfettiFlag(false);
           }, 5000);
           setMode("Finished");
@@ -139,7 +139,7 @@ function Calculator() {
     <main className={"calculator" + (incorrectClassFlag ? " incorrect" : "")}>
       {confettiFlag === true &&
         <Confetti
-          confettiSource={{x: 600, y:600, w:100, h: 50}}
+          confettiSource={{x: 700, y:600, w:100, h: 50}}
           gravity={.3}
           initialVelocityY={12}
           numberOfPieces={20}
