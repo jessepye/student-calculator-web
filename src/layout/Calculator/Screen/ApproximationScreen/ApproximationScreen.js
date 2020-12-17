@@ -1,7 +1,7 @@
 import React from 'react';
 
 const approximationScreen = (props) => {
-  let classes = ["computation-screen"]
+  let classes = ["approximation-screen"]
   if(props.mode === "EnteringApproximation") {
     classes.push("selected")
   }

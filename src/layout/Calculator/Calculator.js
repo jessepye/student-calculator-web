@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Confetti from 'react-confetti';
 import { evaluate } from 'mathjs';
 import Screen from './Screen/Screen';
 import Keypad from './Keypad/Keypad';
@@ -8,6 +9,7 @@ function Calculator() {
   const [result, setResult] = useState('0');
   // const approxPrompt = '(Enter an approximation)';
   const [approximation, setApproximation] = useState('');
+  const [incorrectClassFlag, setIncorrectClassFlag] = useState(false);
   /*
     Mode can be one of these strings:
     EnterintEquation
@@ -52,7 +54,7 @@ function Calculator() {
     }
     let diffProportion = Math.abs(diff/equationResult);
     console.log('diffProportion:', diffProportion);
-    if(diffProportion < 0.15) {
+    if(diffProportion <= 0.5) {
       return true;
     }
 
@@ -110,6 +112,11 @@ function Calculator() {
         if(approximationIsCloseEnough()) {
           setResult(parseFloat(equationResult.toFixed(6)));
           setMode("Finished");
+        } else {
+          setIncorrectClassFlag(true);
+          setTimeout(() => {
+            setIncorrectClassFlag(false)
+          }, 750);
         }
       } else if (mode === "Finished") {
 
@@ -121,8 +128,14 @@ function Calculator() {
   }
 
   return (
-    <main className="calculator">
-      {/* <div class="debug">{mode}</div> */}
+    <main className={"calculator" + (incorrectClassFlag ? " incorrect" : "")}>
+      {/* <div class="debug">incorrectClassFlag: {incorrectClassFlag.toString()}</div> */}
+      <Confetti
+        confettiSource={{x: 600, y:600, w:100, h: 50}}
+        gravity={.15}
+        numberOfPieces={40}
+        recycle={false}
+      />
       <Screen equation={equation} result={result} approximation={approximation} mode={mode}/>
       <Keypad onButtonPress={onButtonPress}/>
     </main>
