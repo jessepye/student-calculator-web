@@ -31,6 +31,13 @@ body {
   --color-black: #000;
 
   --shadow: rgba(0, 0, 0, .4);
+
+  --gradient-top-left: rgba(88, 24, 69, .7);
+  --gradient-top-right:  rgba(216, 14, 91, .7);
+  --screen-color: #d40640;
+  --screen-text-color: white;
+  --enter-button-color: #d40640;
+  --enter-button-hover-color: #f33c70;
 }
 
 .app {
@@ -41,7 +48,7 @@ body {
   */
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(to bottom right, var(--color-pink-transparent), var(--color-purple-transparent)), url("../resources/background.jpg");
+  background-image: linear-gradient(to bottom right, var(--gradient-top-left), var(--gradient-top-right)), url("../resources/background.jpg");
   background-position: center center;
   background-size: cover;
   display: flex;
@@ -63,8 +70,8 @@ body {
   width: 100%;
   overflow: visible;
   white-space: nowrap;
-  color: var(--color-light-white);
-  background-color: var(--color-tomato);
+  color: var(--screen-text-color);
+  background-color: var(--screen-color);
 }
 
 .result-screen {
@@ -72,7 +79,6 @@ body {
   padding: 0 2rem;
   font-size: 6rem;
   font-weight: 600;
-  background-color: color-purple-transparent;
 
   /* To display the value at the bottom-right of the container */
   display: flex;
@@ -84,7 +90,7 @@ body {
   height: 30%;
   padding: 0 2rem;
   font-size: 2.5rem;
-  background-color: var(--color-tomato);
+  background-color: var(--screen-color);
 
   /* To display the value at the right of the container */
   display: flex;
@@ -104,6 +110,32 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
+
+.incorrect {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 
 .selected {
   box-shadow: 0 0 20px var(--shadow);
@@ -147,10 +179,10 @@ body {
 .btn--large {
   width: 50%;
   color: var(--color-white);
-  background-color: var(--color-tomato);
+  background-color: var(--screen-color);
   transition: all .2s;
 }
 
 .btn--large:hover {
-  background-color: var(--color-light-tomato);
+  background-color: var(--enter-button-hover-color);
 }
