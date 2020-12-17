@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Confetti from 'react-confetti';
+// import Reward from 'react-rewards';
 import { evaluate } from 'mathjs';
 import Screen from './Screen/Screen';
 import Keypad from './Keypad/Keypad';
@@ -10,6 +11,7 @@ function Calculator() {
   // const approxPrompt = '(Enter an approximation)';
   const [approximation, setApproximation] = useState('');
   const [incorrectClassFlag, setIncorrectClassFlag] = useState(false);
+  const [confettiFlag, setConfettiFlag] = useState(false)
   /*
     Mode can be one of these strings:
     EnterintEquation
@@ -99,6 +101,7 @@ function Calculator() {
       }
     }
     else if (pressedButton === 'Enter') {
+      // this.reward.rewardMe();
       if (mode === 'EnteringEquation') {
         setMode('EnteringApproximation');
         setApproximation('');
@@ -111,6 +114,11 @@ function Calculator() {
         }
         if(approximationIsCloseEnough()) {
           setResult(parseFloat(equationResult.toFixed(6)));
+          setConfettiFlag(true)
+          setTimeout( () => {
+            console.log("setting flag to false");
+            setConfettiFlag(false);
+          }, 5000);
           setMode("Finished");
         } else {
           setIncorrectClassFlag(true);
@@ -129,13 +137,14 @@ function Calculator() {
 
   return (
     <main className={"calculator" + (incorrectClassFlag ? " incorrect" : "")}>
-      {/* <div class="debug">incorrectClassFlag: {incorrectClassFlag.toString()}</div> */}
-      <Confetti
-        confettiSource={{x: 600, y:600, w:100, h: 50}}
-        gravity={.15}
-        numberOfPieces={40}
-        recycle={false}
-      />
+      {confettiFlag === true &&
+        <Confetti
+          confettiSource={{x: 600, y:600, w:100, h: 50}}
+          gravity={.15}
+          numberOfPieces={30}
+          recycle={false}
+        />
+      }
       <Screen equation={equation} result={result} approximation={approximation} mode={mode}/>
       <Keypad onButtonPress={onButtonPress}/>
     </main>

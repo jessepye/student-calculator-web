@@ -1,4 +1,5 @@
 import React from 'react';
+import Reward from 'react-rewards';
 import KeypadRow from './KeypadRow/KeypadRow';
 import Button from '../../../components/Button/Button';
 
@@ -35,7 +36,7 @@ const keypad = (props) => (
     <KeypadRow>
       <Button onButtonPress={props.onButtonPress}>0</Button>
       <Button onButtonPress={props.onButtonPress}>.</Button>
-      <Button onButtonPress={props.onButtonPress} type="large">
+      <Button onButtonPress={(...p) => { props.onButtonPress(...p) }} type="large">
         Enter
       </Button>
     </KeypadRow>
