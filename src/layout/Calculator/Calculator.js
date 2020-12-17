@@ -140,8 +140,9 @@ function Calculator() {
       {confettiFlag === true &&
         <Confetti
           confettiSource={{x: 600, y:600, w:100, h: 50}}
-          gravity={.15}
-          numberOfPieces={30}
+          gravity={.3}
+          initialVelocityY={12}
+          numberOfPieces={20}
           recycle={false}
         />
       }
